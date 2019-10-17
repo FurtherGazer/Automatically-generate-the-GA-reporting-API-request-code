@@ -1,0 +1,36 @@
+{
+	"manifest_version": 2,
+	"name": "自定义获取GA自定义报告内容设置",
+	"version": "1.0",
+	"description": "进入GA自定义报告页面，完成设置，当点击完成提交时，会自动抓取设置的自定义报告内容，并生成可服用的请求代码.",
+	"author": "zhangweisong",
+	"icons":
+	{
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"background":
+	{
+		"scripts": ["js/background.js"]
+	},
+	"browser_action": 
+	{
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": 
+	[
+		{
+			"matches": ["https://analytics.google.com/analytics/web/*"],
+			"js": ["js/content-script.js"]
+		}
+	],
+	"permissions":
+	[
+		"webRequest",
+		"*://*.google.com/",
+		"webRequestBlocking",
+		"storage"
+	],
+	"web_accessible_resources": []
+}
