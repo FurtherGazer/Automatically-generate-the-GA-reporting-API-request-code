@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "自定义获取GA自定义报告内容设置",
 	"version": "1.0",
-	"description": "进入GA自定义报告页面，完成设置，当点击完成提交时，会自动抓取设置的自定义报告内容，并生成可服用的请求代码.",
+	"description": "进入GA自定义报告页面，完成设置，当点击完成提交时，会自动抓取设置的自定义报告内容，并生成可复用的请求代码.",
 	"author": "zhangweisong",
 	"icons":
 	{

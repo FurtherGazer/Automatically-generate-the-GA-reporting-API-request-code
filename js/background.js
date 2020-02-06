@@ -1,5 +1,42 @@
 console.log('背景页加载！')
 
+function _hashCoreReporting(i){
+    var _hashDict = {
+        'analytics.visits' : 'ga:sessions', 
+        'analytics.avgSessionTime' : 'ga:avgSessionDuration', 
+        'analytics.totalVisitors' : 'ga:users',
+        'analytics.avgPageviews' : 'ga:pageviewsPerSession',
+        'analytics.customMetric' : 'ga:metric',
+        "analytics.productRevenuePerProducts" : 'ga:revenuePerItem',
+        'analytics.productsPerProductPurchases' : 'ga:itemsPerPurchase',
+        "analytics.totalPublisherImpressionsPerVisit" : 'ga:totalPublisherImpressionsPerSession',
+        "analytics.totalPublisherRevenuePerThousandVisits" : 'ga:totalPublisherRevenuePer1000Sessions',
+        "analytics.totalPublisherViewableImpressionPercent" : 'ga:totalPublisherViewableImpressionsPercent',
+        "analytics.totalPublisherPageImpressions" : 'ga:totalPublisherMonetizedPageviews', // ?
+        "analytics.countOfVisitsToATransaction" : 'ga:sessionsToTransaction',
+        "analytics.socialInteractionsPerVisit" : "ga:socialInteractionsPerSession", 
+        "analytics.visitsWithEvent" : "ga:sessionsWithEvent", 
+        "analytics.searches" : "ga:searchExits", // ?
+        "analytics.siteSearchGoalValuePerSearch" : "ga:goalValueAllPerSearch",
+        "analytics.eventAvgValue" : "ga:avgEventValue", 
+        "analytics.depthPerSearch" : "ga:avgSearchDepth",
+        "analytics.timeOnAppview" : "ga:timeOnScreen",
+        "analytics.searchVisits" : "ga:searchSessions",
+        "analytics.percentVisitsWithSearch" : "ga:percentSessionsWithSearch", 
+        "analytics.eventsPerVisit" : "ga:eventsPerSessionWithEvent",
+    }
+    var _specialHashDict = {
+        "analytics.goalXXCompletions" : "ga:goalXXCompletions",
+        "analytics.abandonedFunnelsRate1" : "ga:goalXXAbandons", 
+        "analytics.siteSearchGoalConversionRate1" : "ga:searchGoalXXConversionRate", 
+    }
+    if( i in _hashDict){
+        return _hashDict[i]
+    }else{ // 这块还需要考虑到自定义维度、指标的问题
+        return i.replace('analytics.', 'ga:')
+    }
+}
+
 chrome.webRequest.onBeforeRequest.addListener(function(details){
     console.log('发现请求。');
     console.log('Request_URL::', details.url);
@@ -11,11 +48,11 @@ chrome.webRequest.onBeforeRequest.addListener(function(details){
     if(request_body_json.tab[0]["analytics.FlatTable.config"]){
         var dimensions = [];
         request_body_json.tab[0]["analytics.FlatTable.config"].dimension.forEach(function(i){
-            dimensions.push(i.replace('analytics.', 'ga:'))
+            dimensions.push(_hashCoreReporting(i))
         });
         var metrics = [];
         request_body_json.tab[0]["analytics.FlatTable.config"].metric.forEach(function(i){
-            metrics.push(i.replace('analytics.', 'ga:'))
+            metrics.push(_hashCoreReporting(i))
         })
     }else{
         console.log('请求无效。')
@@ -90,5 +127,14 @@ chrome.webRequest.onBeforeRequest.addListener(function(details){
 
 function getDate(){
     var today = new Date().toLocaleDateString().split('/').join('-');
-    return today
+    var format_today = today.split('-');
+    var return_today = []
+    for(var i in format_today){
+        if( format_today[i].length == 1){
+            return_today.push('0'+format_today[i])
+        }else{
+            return_today.push(format_today[i])
+        }
+    }
+    return return_today.join('-')
 }
