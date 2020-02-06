@@ -24,6 +24,27 @@ function _hashCoreReporting(i){
         "analytics.searchVisits" : "ga:searchSessions",
         "analytics.percentVisitsWithSearch" : "ga:percentSessionsWithSearch", 
         "analytics.eventsPerVisit" : "ga:eventsPerSessionWithEvent",
+        "analytics.durationPerSearch" : "ga:searchDuration",
+        "analytics.searchDuration" : "ga:avgSearchDuration", // ?
+        "analytics.siteSearchGoalConversionRate" : "ga:searchGoalConversionRateAll", // ?
+        "analytics.uniqueEventsTrue" : "ga:uniqueEvents",
+        "analytics.timeOnSite" : "ga:sessionDuration",
+        "analytics.pageviewsPerSearch" : "ga:searchResultViews", 
+        "analytics.avgAppviews" : "ga:screenviewsPerSession",
+        "analytics.averageNumberOfVisitsPerVisitor" : "ga:sessionsPerUser", 
+        "analytics.avgSessionTime" : "ga:avgSessionDuration", 
+        "analytics.avgAppviewDuration" : "ga:avgScreenviewDuration", 
+        "analytics.avgPageDuration" : "ga:avgTimeOnPage", 
+        "analytics.appviews" : "ga:screenviews", 
+        "analytics.percentSearchExits" : "ga:searchExitRate", 
+        "analytics.adwordsCriteriaType" : "ga:adKeywordMatchType",
+        "analytics.percentNewVisits" : "ga:percentNewSessions", 
+        "analytics.newVisits" : "ga:newUsers",
+        "analytics.totalVisitors" : "ga:users", 
+        "analytics.adxRevenuePerThousandVisits" : "ga:adxRevenuePer1000Sessions", 
+        "analytics.adxImpressionsPerVisit" : "ga:adxImpressionsPerSession", 
+        "analytics.adxPageImpressions" : "ga:adxMonetizedPageviews", 
+        "analytics.adxViewableImpressionPercent" : "ga:adxViewableImpressionsPercent",
     }
     var _specialHashDict = {
         "analytics.goalXXCompletions" : "ga:goalXXCompletions",
