@@ -15,4 +15,10 @@
 
 ## 注意
 
-这个插件对部分维度指标不适配，后面会抽空做一下规则，进行补充，如果遇到了，大家请参考：https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/ 并以此为准。
+这个插件对部分维度指标不适配，后面会抽空做一下规则，进行补充，如果遇到了，大家请参考：
+
+https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/ 
+
+并以此为准。
+
+

@@ -45,18 +45,70 @@ function _hashCoreReporting(i){
         "analytics.adxImpressionsPerVisit" : "ga:adxImpressionsPerSession", 
         "analytics.adxPageImpressions" : "ga:adxMonetizedPageviews", 
         "analytics.adxViewableImpressionPercent" : "ga:adxViewableImpressionsPercent",
+        "analytics.query" : "ga:adMatchedQuery",
+        "analytics.contentDomain" : "ga:adPlacementDomain", // ?
+        "analytics.contentUrl" : "ga:adPlacementUrl",  // ?
+        "analytics.contentPlacementType" : "ga:adTargetingOption", // 展示位置类型
+        "analytics.displayUrl" : "ga:adDisplayUrl", 
+        "analytics.matchType" : "ga:adMatchType", 
+        "analytics.adwordsExternalCustomerID" : "ga:adwordsCustomerID", 
+        // "analytics.adwordsExternalCustomerName" : "ga: ",  // Adwords 账号
+        "analytics.trafficChannel" : "ga:channelGrouping", // 默认渠道分组
+        // "analytics.trafficType" // 流量类型
+        "analytics.socialTarget" : "ga:socialInteractionTarget", 
+        "analytics.socialAction" : "ga:socialInteractionAction", 
+        // "analytics.directSession" // 直接会话
+        "analytics.originatingSocialNetwork" : "ga:socialInteractionNetwork", 
+        "analytics.socialNetworkAction" : "ga:socialInteractionNetworkAction",
+        // "analytics.socialNetworkActionVisit" // 社交网络和操作（会话）
+        "analytics.gwoCombinationId" : "ga:experimentId", 
+        "analytics.appviewDepth" : "ga:screenDepth", 
+        "analytics.contentDescription" : "ga:screenName",
+        "analytics.gwoExperimentId" : "ga:experimentId", 
+        "analytics.gwoExperimentName" : "ga:experimentName",
+        "analytics.exitContentDescription" : "ga:exitScreenName",
+        "analytics.landingContentDescription" : "ga:landingScreenName", 
+        // "analytics.dma","analytics.dmaId"
+        "analytics.countryId" : "ga:countryIsoCode", 
+        "analytics.visitDuration" : "ga:sessionDurationBucket",
+        "analytics.countOfVisits" : "ga:sessionCount",
+        "analytics.daysSinceLastVisit" : "ga:daysSinceLastSession", 
+        "analytics.sourcePropertyId" : "ga:sourcePropertyTrackingId", 
+        "analytics.sourcePropertyName" : "ga:sourcePropertyDisplayName", 
+        "analytics.age" : "ga:userAgeBracket",
+        "analytics.interest" : "ga:interestOtherCategory", // ? 
+        // "analytics.regionIsoCode" 区域ISO代码
+        // analytics.latitude analytics.brandingInterest analytics.gender
+        "analytics.visitorBucket" : "ga:userBucket",
+        "analytics.visitorType" : "ga:userType",
+        // analytics.inmarketInterest
     }
     var _specialHashDict = {
         "analytics.goalXXCompletions" : "ga:goalXXCompletions",
         "analytics.abandonedFunnelsRate1" : "ga:goalXXAbandons", 
         "analytics.siteSearchGoalConversionRate1" : "ga:searchGoalXXConversionRate", 
+        // "analytics.previousPageGroup1" : ,
+        // "analytics.pageGroup1" : "ga:contentGroupXX",
+        // "analytics.landingPageGroup1" 着陆页组 1（目标内容组）
+        "analytics.customDimension19" : "ga:dimensionXX", 
+        "analytics.customMetric1" : "ga:metricXX"
     }
     if( i in _hashDict){
         return _hashDict[i]
     }else{ // 这块还需要考虑到自定义维度、指标的问题
+        // 如果 i 属于 _specialHashDict 中的一类
+        if( /^analytics.custom\w*[0-9]+/.test(i)){
+            i = i.replace('analytics.custom', 'ga:')
+            i = i.replace(i[3], i[3].toLowerCase())
+            return i.replace('analytics.custom', 'ga:')
+        }
         return i.replace('analytics.', 'ga:')
     }
 }
+
+// 不确定
+// "analytics.clickSocialAnnotationType" 社交注释类型
+// 
 
 chrome.webRequest.onBeforeRequest.addListener(function(details){
     console.log('发现请求。');
